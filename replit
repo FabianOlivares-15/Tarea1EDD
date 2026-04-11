@@ -1,0 +1,28 @@
+compile = "gcc tdas/*.c tarea3.c -Wno-unused-result -o tarea3"
+run = "./tarea3"
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Ejecutar tarea1"
+
+[[workflows.workflow]]
+name = "Ejecutar tarea1"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "gcc tdas/*.c tarea1.c -Wno-unused-result -o tarea1 && ./tarea1"
+
+[workflows.workflow.metadata]
+outputType = "console"
