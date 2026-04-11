@@ -2,6 +2,7 @@
 #include "tdas/extra.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 typedef struct{
@@ -39,7 +40,6 @@ void registrar_categorias(List *listCategorias) {
 
 void mostrar_categorias(List *categorias) {
   printf("Categorías:\n");
-  // Aquí implementarías la lógica para mostrar las categorías
   if(categorias == NULL) return;
   categoria *aux = (categoria*) list_first(categorias);
   while(aux != NULL){
@@ -50,16 +50,16 @@ void mostrar_categorias(List *categorias) {
 
 void eliminar_categoria(List *categorias){
   char aEliminar[50];
-  scanf(" %49s", aEliminar)
+  printf("Ingresa nombre de la Categoría a eliminar: ");
+  scanf(" %49s", aEliminar);
   categoria *catActual = (categoria*) list_first(categorias);
   while(catActual != NULL){
-     if(strcmp(catActual, aEliminar)== 0){
+     if(strcmp(catActual->nombre, aEliminar) == 0){
        list_popCurrent(categorias);
        free(catActual);
        break;
      }
   catActual = (categoria*) list_next(categorias);
-  }
   }
 }
 
@@ -78,17 +78,16 @@ int main() {
       registrar_categorias(categorias);
       break;
     case '2':
-      // Lógica para eliminar una categoría
       eliminar_categoria(categorias);
       break;
     case '3':
       mostrar_categorias(categorias);
       break;
     case '4':
-      // Lógica para registraa Tareaente
+      // Lógica para registrar Tarea
       break;
     case '5':
-      // Lógica para atenla tarea siguienteente
+      // Lógica para atender la tarea siguiente
       break;
     case '6':
       // Lógica para mostrar el tablero general
@@ -97,7 +96,7 @@ int main() {
       // Lógica para filtrar por categoría
       break;
     case '8':
-      puts("Saliendo del sistema de gestión hospitalaria...");
+      puts("Saliendo del sistema de gestión de tareas...");
       break;
     default:
       puts("Opción no válida. Por favor, intente de nuevo.");
@@ -106,7 +105,6 @@ int main() {
 
   } while (opcion != '8');
 
-  // Liberar recursos, si es necesario
   list_clean(categorias);
 
   return 0;
