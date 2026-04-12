@@ -46,8 +46,8 @@ void registrar_categorias(List *listCategorias) {
 }
 
 void mostrar_categorias(List *categorias) {
+  if(categorias == NULL) printf("No hay categorias\n")return;
   printf("Categorías:\n");
-  if(categorias == NULL) return;
   categoria *aux = (categoria*) list_first(categorias);
   while(aux != NULL){
     printf("%s\n", aux->nombre);
@@ -56,6 +56,7 @@ void mostrar_categorias(List *categorias) {
 }
 
 void eliminar_categoria(List *categorias, List *tareas){
+  if(categorias == NULL) printf("No hay categorias\n")return;
   char aEliminar[50];
   printf("Ingresa nombre de la Categoría a eliminar: ");
   scanf(" %49s", aEliminar);
@@ -135,6 +136,7 @@ void tableroGeneral(List *tareas){
 }
 
 void filtrarPorCategoria(List *categorias, List *tareas){
+  if(categorias == NULL) printf("No hay categorias\n")return;
   char catElegida[50];
   printf("Escoga la categoria a mostrar: ");
   scanf("%s", catElegida);
