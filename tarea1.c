@@ -5,7 +5,7 @@
 #include <string.h>
 #include <time.h>
 
-
+//Creamos 2 struct una para las categorias y otra para las tareas, la struct de tareas contiene lo pedido
 typedef struct{
   char nombre[50];
 } categoria;
@@ -34,6 +34,8 @@ void mostrarMenuPrincipal() {
 }
 
 void registrar_categorias(List *listCategorias) {
+  // en esta funcion registramos las categorias agregandolas a una lista creada en el main, usamos metodos de cadenas para copiar nombres
+  // usamos tdas para agregar a nuestra lista
   printf("Registrar nueva categoría\n");
   char nombre[50];
   printf("Ingresa nombre de la Categoría: ");
@@ -46,6 +48,7 @@ void registrar_categorias(List *listCategorias) {
 }
 
 void mostrar_categorias(List *categorias) {
+  //recorremos la lista de categorias y vamos mostrando las categorias de esta
   if(list_first(categorias) == NULL){
     printf("No hay categorias\n");
     return;
@@ -63,6 +66,7 @@ void eliminar_categoria(List *categorias, List *tareas){
     printf("No hay categorias\n");
     return;
   }
+  //leemos el nombre de la categoria a eliminar, vamos recorriendo la lista y comparando si los nombres coinciden si coinciden se elimina
   char aEliminar[50];
   printf("Ingresa nombre de la Categoría a eliminar: ");
   scanf(" %49s", aEliminar);
@@ -75,6 +79,7 @@ void eliminar_categoria(List *categorias, List *tareas){
      }
   catActual = (categoria*) list_next(categorias);
   }
+  //buscamos las tareas que pertenezcan a esa categoria en nuestra lista de tareas y las eliminamos
   tarea *tareaActual = (tarea*)list_first(tareas);
   while(tareaActual != NULL){
     if(strcmp(tareaActual->categoria, aEliminar) == 0){
@@ -91,6 +96,7 @@ void registrarTarea(List *categorias, List *tareas){
     printf("Primero Ingrese una Categoria\n");
     return;
   }
+  //registramos el nombre de la categoria de nuestra nueva tarea
   char catNombre[50];
   printf("Escriba el nombre de su categoria: ");
   scanf(" %49s", catNombre);
@@ -105,7 +111,7 @@ void registrarTarea(List *categorias, List *tareas){
     printf("Categoria inexistente %s\n", catNombre);
     return;
   }
-
+//registramos la descripcion y la hora de nuestra nueva tarea y la agregamos a nuestra lista de tareas
   tarea *newTarea = (tarea*)malloc(sizeof(tarea));
   if(newTarea != NULL){
     strcpy(newTarea->categoria, catNombre);
@@ -119,6 +125,7 @@ void registrarTarea(List *categorias, List *tareas){
 }
 
 void atenderSiguiente(List *tareas){
+  //atendemos la tarea mas antigua mostramos sus datos y la eliminamos
   if(list_first(tareas) == NULL){
     printf("¡Libre de pendientes!\n");
     return;
@@ -130,6 +137,7 @@ void atenderSiguiente(List *tareas){
 
 
 void tableroGeneral(List *tareas){
+  //mostramos todas las tareas con sus respectivas categorias
   tarea *tareaActual = (tarea*)list_first(tareas);
   if(tareaActual == NULL){
     printf("No Hay pendientes, Tablero Vacio.");
@@ -142,6 +150,7 @@ void tableroGeneral(List *tareas){
 }
 
 void filtrarPorCategoria(List *categorias, List *tareas){
+  //leemos la categoria escogida a mostrar y mostramos todas sus tareas
   if(list_first(categorias) == NULL){
     printf("No hay categorias\n");
     return;
@@ -165,8 +174,8 @@ void filtrarPorCategoria(List *categorias, List *tareas){
 
 int main() {
   char opcion;
-  List *categorias = list_create(); // Lista para almacenar categorías
-  List *tareas = list_create();
+  List *categorias = list_create(); // Lista para almacenar categorías con struct categorias
+  List *tareas = list_create(); // Lista para almacenar tareas con struct tarea
 
   do {
     mostrarMenuPrincipal();
