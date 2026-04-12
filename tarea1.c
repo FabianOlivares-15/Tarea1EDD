@@ -46,7 +46,7 @@ void registrar_categorias(List *listCategorias) {
 }
 
 void mostrar_categorias(List *categorias) {
-  if(categorias == NULL){
+  if(list_first(categorias) == NULL){
     printf("No hay categorias\n");
     return;
   }
@@ -59,7 +59,7 @@ void mostrar_categorias(List *categorias) {
 }
 
 void eliminar_categoria(List *categorias, List *tareas){
-  if(categorias == NULL){
+  if(list_first(categorias) == NULL){
     printf("No hay categorias\n");
     return;
   }
@@ -142,7 +142,7 @@ void tableroGeneral(List *tareas){
 }
 
 void filtrarPorCategoria(List *categorias, List *tareas){
-  if(categorias == NULL){
+  if(list_first(categorias) == NULL){
     printf("No hay categorias\n");
     return;
   }
