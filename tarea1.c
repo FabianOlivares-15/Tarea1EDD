@@ -118,6 +118,7 @@ void registrarTarea(List *categorias, List *tareas){
     printf("Ingrese la descripcion de su tarea: ");
     scanf(" %99[^\n]", newTarea->descripcion);
     time_t tiempo = time(NULL);
+    tiempo -= 14400;
     struct tm *tiempoHMS = localtime(&tiempo);
     strftime(newTarea->hora, 20, "%H:%M:%S", tiempoHMS);
     list_pushBack(tareas, newTarea);
@@ -144,7 +145,7 @@ void tableroGeneral(List *tareas){
     return;
   }
   while(tareaActual != NULL){
-    printf("Descripcion: %s | Categoria: %s\n", tareaActual->descripcion, tareaActual->categoria);
+    printf("Descripcion: %s | Categoria: %s | Hora [%s]\n", tareaActual->descripcion, tareaActual->categoria, tareaActual->hora);
     tareaActual = (tarea*) list_next(tareas);
   }
 }
